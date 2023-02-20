@@ -1,0 +1,9 @@
+{
+	"name": "sanjuinstance",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "7f4d481e-439d-48a5-aa6e-5825b55647a7",
+		"tenantId": "8e0ce8b8-5506-4098-9bf2-1083b89becdb"
+	}
+}
