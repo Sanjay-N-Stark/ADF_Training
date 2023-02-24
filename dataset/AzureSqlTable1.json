@@ -8,7 +8,7 @@
 		"parameters": {
 			"tablename": {
 				"type": "string",
-				"defaultValue": "table2"
+				"defaultValue": "table1"
 			}
 		},
 		"folder": {
@@ -18,7 +18,11 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "dbo"
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().tablename",
+				"type": "Expression"
+			}
 		}
 	}
 }
