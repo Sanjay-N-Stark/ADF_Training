@@ -135,7 +135,9 @@
 										{
 											"referenceName": "AzureSqlTable1",
 											"type": "DatasetReference",
-											"parameters": {}
+											"parameters": {
+												"tablename": "table1"
+											}
 										}
 									]
 								}
