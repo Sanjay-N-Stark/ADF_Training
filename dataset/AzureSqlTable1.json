@@ -5,11 +5,20 @@
 			"referenceName": "sanjuAzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"tablename": {
+				"type": "string",
+				"defaultValue": "table2"
+			}
+		},
 		"folder": {
 			"name": "training"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo"
+		}
 	}
 }
