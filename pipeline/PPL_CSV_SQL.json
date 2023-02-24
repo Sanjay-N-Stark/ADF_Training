@@ -46,7 +46,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity(\"GetAllCSVfiles\").output.childitems",
+						"value": "@activity('GetAllCSVfiles').output.childitems",
 						"type": "Expression"
 					},
 					"activities": [
