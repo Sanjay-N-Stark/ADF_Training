@@ -58,8 +58,8 @@
 						}
 					},
 					{
-						"name": "ForEach1",
-						"type": "ForEach",
+						"name": "Switch1",
+						"type": "Switch",
 						"dependsOn": [
 							{
 								"activity": "GetAllCSVfiles",
@@ -70,73 +70,75 @@
 						],
 						"userProperties": [],
 						"typeProperties": {
-							"items": {
-								"value": "@activity('GetAllCSVfiles').output.childitems",
+							"on": {
+								"value": "@activity('GetAllCSVfiles').output.itemName",
 								"type": "Expression"
 							},
-							"activities": [
+							"cases": [
 								{
-									"name": "Copy data1",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "DelimitedTextSource",
-											"storeSettings": {
-												"type": "AzureBlobStorageReadSettings",
-												"recursive": true,
-												"wildcardFileName": {
-													"value": "@item().name",
-													"type": "Expression"
+									"value": "Assignment_1.csv",
+									"activities": [
+										{
+											"name": "Copy data1",
+											"type": "Copy",
+											"dependsOn": [],
+											"policy": {
+												"timeout": "0.12:00:00",
+												"retry": 0,
+												"retryIntervalInSeconds": 30,
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"source": {
+													"type": "DelimitedTextSource",
+													"storeSettings": {
+														"type": "AzureBlobStorageReadSettings",
+														"recursive": true,
+														"wildcardFileName": {
+															"value": "@activity('GetAllCSVfiles').output.itemName",
+															"type": "Expression"
+														},
+														"enablePartitionDiscovery": false
+													},
+													"formatSettings": {
+														"type": "DelimitedTextReadSettings"
+													}
 												},
-												"enablePartitionDiscovery": false
+												"sink": {
+													"type": "AzureSqlSink",
+													"writeBehavior": "insert",
+													"sqlWriterUseTableLock": false,
+													"tableOption": "autoCreate",
+													"disableMetricsCollection": false
+												},
+												"enableStaging": false,
+												"translator": {
+													"type": "TabularTranslator",
+													"typeConversion": true,
+													"typeConversionSettings": {
+														"allowDataTruncation": true,
+														"treatBooleanAsNumber": false
+													}
+												}
 											},
-											"formatSettings": {
-												"type": "DelimitedTextReadSettings"
-											}
-										},
-										"sink": {
-											"type": "AzureSqlSink",
-											"writeBehavior": "insert",
-											"sqlWriterUseTableLock": false,
-											"tableOption": {
-												"value": "@{item().name}",
-												"type": "Expression"
-											},
-											"disableMetricsCollection": false
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "AllCSV",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "AzureSqlTable1",
-											"type": "DatasetReference",
-											"parameters": {
-												"tablename": "table1"
-											}
+											"inputs": [
+												{
+													"referenceName": "AllCSV",
+													"type": "DatasetReference",
+													"parameters": {}
+												}
+											],
+											"outputs": [
+												{
+													"referenceName": "AzureSqlTable1",
+													"type": "DatasetReference",
+													"parameters": {
+														"tablename": "table1"
+													}
+												}
+											]
 										}
 									]
 								}
@@ -2226,10 +2228,6 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": {
-							"value": "@item().name",
-							"type": "Expression"
-						},
 						"container": "sanjucontainer"
 					},
 					"columnDelimiter": ",",
