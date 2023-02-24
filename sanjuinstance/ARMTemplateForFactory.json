@@ -45,8 +45,7 @@
 								"parameters": {}
 							},
 							"fieldList": [
-								"childItems",
-								"itemType"
+								"childItems"
 							],
 							"storeSettings": {
 								"type": "AzureBlobStorageReadSettings",
