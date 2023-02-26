@@ -1,0 +1,41 @@
+{
+	"name": "Join_1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sanjuAzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "dataflow"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Join_1.xlsx",
+				"container": "sanjucontainer"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Customer",
+				"type": "String"
+			},
+			{
+				"name": "Cards",
+				"type": "String"
+			},
+			{
+				"name": "Card Type",
+				"type": "String"
+			},
+			{
+				"name": "Card Subtype",
+				"type": "String"
+			}
+		]
+	}
+}
