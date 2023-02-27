@@ -1,5 +1,5 @@
 {
-	"name": "Exists_2",
+	"name": "Exists_Blob_2",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "sanjuAzureBlobStorage1",

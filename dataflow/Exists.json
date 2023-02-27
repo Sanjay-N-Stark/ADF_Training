@@ -8,21 +8,45 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "Exists_Blob_1",
+						"type": "DatasetReference"
+					},
 					"name": "source1"
 				},
 				{
 					"dataset": {
-						"referenceName": "Exists_2",
+						"referenceName": "Exists_Blob_2",
 						"type": "DatasetReference"
 					},
 					"name": "source2"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Exists_DB",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "exists1"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1",
+				"source(output(",
+				"          Index as string,",
+				"          {Organization Id} as string,",
+				"          Website as string,",
+				"          Description as string,",
+				"          {Number of employees} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
 				"source(output(",
 				"          Index as string,",
 				"          Name as string,",
@@ -32,7 +56,20 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source2"
+				"     ignoreNoFilesFound: false) ~> source2",
+				"source1, source2 exists(source1@Index == source2@Index,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists1",
+				"exists1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
