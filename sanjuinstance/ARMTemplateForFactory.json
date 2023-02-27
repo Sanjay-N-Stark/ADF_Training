@@ -236,8 +236,7 @@
 									"source1": {},
 									"sink1": {},
 									"sink2": {}
-								},
-								"linkedServiceParameters": {}
+								}
 							},
 							"staging": {},
 							"compute": {
@@ -2761,6 +2760,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SPlit_DB_2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sanjuAzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "dataflow"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Split_2"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/sanjuAzureSqlDatabase1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQL_CBG_CARDS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3143,7 +3166,7 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "Split_DB_1",
+								"referenceName": "SPlit_DB_2",
 								"type": "DatasetReference"
 							},
 							"name": "sink2"
@@ -3189,31 +3212,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Split_Excel')]",
-				"[concat(variables('factoryId'), '/datasets/Split_DB_1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SPlit_DB_2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "sanjuAzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "dataflow"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Split_2"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/sanjuAzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/datasets/Split_DB_1')]",
+				"[concat(variables('factoryId'), '/datasets/SPlit_DB_2')]"
 			]
 		}
 	]
