@@ -1,6 +1,9 @@
 {
 	"name": "Join",
 	"properties": {
+		"folder": {
+			"name": "training"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
