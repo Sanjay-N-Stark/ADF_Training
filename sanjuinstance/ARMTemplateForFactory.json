@@ -236,7 +236,8 @@
 									"source1": {},
 									"sink1": {},
 									"sink2": {}
-								}
+								},
+								"linkedServiceParameters": {}
 							},
 							"staging": {},
 							"compute": {
@@ -3142,7 +3143,7 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "Split_DB_1",
+								"referenceName": "SPlit_DB_2",
 								"type": "DatasetReference"
 							},
 							"name": "sink2"
@@ -3189,7 +3190,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Split_Excel')]",
-				"[concat(variables('factoryId'), '/datasets/Split_DB_1')]"
+				"[concat(variables('factoryId'), '/datasets/Split_DB_1')]",
+				"[concat(variables('factoryId'), '/datasets/SPlit_DB_2')]"
 			]
 		},
 		{

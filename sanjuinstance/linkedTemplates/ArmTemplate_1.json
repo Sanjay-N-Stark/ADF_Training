@@ -2159,7 +2159,7 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "Split_DB_1",
+								"referenceName": "SPlit_DB_2",
 								"type": "DatasetReference"
 							},
 							"name": "sink2"
@@ -2284,7 +2284,8 @@
 									"source1": {},
 									"sink1": {},
 									"sink2": {}
-								}
+								},
+								"linkedServiceParameters": {}
 							},
 							"staging": {},
 							"compute": {
