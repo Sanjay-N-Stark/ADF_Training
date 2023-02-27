@@ -1,0 +1,15 @@
+{
+	"name": "Split_DB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sanjuAzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "dataflow"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
