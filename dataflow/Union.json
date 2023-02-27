@@ -1,0 +1,73 @@
+{
+	"name": "Union",
+	"properties": {
+		"folder": {
+			"name": "training"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "sanjuAzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "CreditSource"
+				},
+				{
+					"linkedService": {
+						"referenceName": "sanjuAzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "DebitSource"
+				}
+			],
+			"sinks": [
+				{
+					"linkedService": {
+						"referenceName": "sanjuAzureSqlDatabase1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "CreditDebit"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'excel',",
+				"     container: 'sanjucontainer',",
+				"     fileName: 'Union.xlsx',",
+				"     sheetName: 'Credit',",
+				"     firstRowAsHeader: true) ~> CreditSource",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'excel',",
+				"     container: 'sanjucontainer',",
+				"     fileName: 'Union.xlsx',",
+				"     sheetName: 'Debit',",
+				"     firstRowAsHeader: true) ~> DebitSource",
+				"CreditSource, DebitSource union(byName: true)~> CreditDebit",
+				"CreditDebit sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: '',",
+				"     tableName: '',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}
