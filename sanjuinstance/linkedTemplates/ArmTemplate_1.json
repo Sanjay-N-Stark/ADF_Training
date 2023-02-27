@@ -2159,7 +2159,7 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "SPlit_DB_2",
+								"referenceName": "Split_DB_1",
 								"type": "DatasetReference"
 							},
 							"name": "sink2"
@@ -2178,7 +2178,7 @@
 						"     allowSchemaDrift: false,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> source1",
-						"source1 split(Value<25,",
+						"source1 split(Value < 25,",
 						"     disjoint: false) ~> split1@(OutputSplit1, OutputSplit2)",
 						"split1@OutputSplit1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
@@ -2186,7 +2186,6 @@
 						"     insertable:true,",
 						"     updateable:false,",
 						"     upsertable:false,",
-						"     recreate:true,",
 						"     format: 'table',",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
