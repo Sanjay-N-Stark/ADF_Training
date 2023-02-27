@@ -1,5 +1,5 @@
 {
-	"name": "Split_DB_1",
+	"name": "SPlit_DB_2",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "sanjuAzureSqlDatabase1",
@@ -13,7 +13,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Split_1"
+			"table": "Split_2"
 		}
 	}
 }

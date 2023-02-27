@@ -18,14 +18,14 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Split_DB",
+						"referenceName": "Split_DB_1",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
 				},
 				{
 					"dataset": {
-						"referenceName": "Split_DB",
+						"referenceName": "Split_DB_1",
 						"type": "DatasetReference"
 					},
 					"name": "sink2"
